@@ -16,10 +16,10 @@ Chapter 1. The Machine Learning Landscape
   Classification and Regression tasks/problems.
 
 5.Can you name four(4) common unsupervised tasks?
-  1- Clustering.
-  2- Dimensionality reduction/ Visualisation.
-  3- Anomaly/ Novelty detection.
-  4- Association rule learning.
+  - Clustering.
+  - Dimensionality reduction/ Visualisation.
+  - Anomaly/ Novelty detection.
+  - Association rule learning.
 
 6.What type of Machine Learning algorithm would you use to allow a robot to walk in various unknown terrains?
   Reinforcement Learning.
@@ -32,6 +32,10 @@ Chapter 1. The Machine Learning Landscape
   if we don't have a labeled training set. It may also be framed as a semi-supervised learning problem if we have few labeled instances in the given training set.
 
 9.What is an online learning system?
+  If a system is trained incrementally by feeding it data instances sequentially, either individually or in small groups it is called an online learning system or   incremental learning system.
+
+10. What is out-of-core learning?
+
   
 
    
