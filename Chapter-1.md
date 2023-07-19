@@ -1,9 +1,10 @@
 Chapter 1. The Machine Learning Landscape
 
-1. How would you define Machine Learning? \n
+1. How would you define Machine Learning?
+   
   A computer program (machine) learns if its performance on some specific task increases by Experience.
 
-2. Can you name four types of problems where it shines?
+3. Can you name four types of problems where it shines?
   - Problems for which existing solutions require a lot of fine-tuning or long lists of rules.
   - Complex problems for which using a traditional approach yields no good solution.
   - Fluctuating environments: a Machine Learning system can adapt to new data.
