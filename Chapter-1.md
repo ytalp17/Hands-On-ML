@@ -1,6 +1,6 @@
 Chapter 1. The Machine Learning Landscape
 
-1. How would you define Machine Learning?
+1. How would you define Machine Learning? \n
   A computer program (machine) learns if its performance on some specific task increases by Experience.
 
 2. Can you name four types of problems where it shines?
@@ -9,7 +9,7 @@ Chapter 1. The Machine Learning Landscape
   - Fluctuating environments: a Machine Learning system can adapt to new data.
   - Getting insights about complex problems and large amounts of data.
 
-3. What is a labeled training set?
+3. What is a labeled training set? \n
    A training set whose instances have desired solutions. (either class or target depending on the problem at hand (classification/regression))
 
 4. What are the two most common supervised tasks?
