@@ -40,7 +40,7 @@
    the model suffers from high bias or high variance? Should you increase the regularization hyperparameter α or reduce it?
    The model suffers from high bias (it underfits to the training data). You better decrease the regularization hyper-parameter.
 
-10.Why would you want to use:
+10. Why would you want to use:
 
 a. Ridge Regression instead of plain Linear Regression (i.e., without any regularization)?
 b. Lasso instead of Ridge Regression?
@@ -56,6 +56,99 @@ Ac. If your data matrix is not singular (#features > #data points) and/or multic
     multilabel and multioutput problems!) Hence, two Logistic regression for each class pairs would be more suitable!
 
 12. Implement Batch Gradient Descent with early stopping for Softmax Regression (without using Scikit-Learn).
+
+```python
+rfrom sklearn.preprocessing import OneHotEncoder, StandardScaler
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn import datasets
+
+iris = datasets.load_iris()
+
+
+
+#Softmax Regression with Batch Gradient Descent
+np.random.seed(1743)
+#prepare data
+X = iris["data"][:, (2, 3)]  # petal length, petal width
+#two classes
+y = iris["target"]
+
+#preprocess and add bias column all 1s
+one_hot = OneHotEncoder().fit_transform(y.reshape(-1,1))
+y_one_hot = one_hot.toarray()
+X_bias = np.c_[np.ones((len(X),1)),X]
+
+#split dataset
+rand_indices = np.random.permutation(len(X))
+
+train_l = int(len(X)*0.6)
+
+X_train = X_bias[rand_indices[:train_l],:]
+X_val = X_bias[rand_indices[train_l:], :]
+
+y_train = y_one_hot[rand_indices[:train_l], :]
+y_val = y_one_hot[rand_indices[train_l:],:]
+
+#BGD
+##def softmax fnc
+def softmax(x):
+    return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
+
+
+
+epsilon = 1e-7
+eta = 0.3
+n_iterations = 10000
+m = len(X_train)
+
+#randomly initialize theta
+theta = np.random.randn(X_train.shape[1], y_train.shape[1])
+
+best_loss = np.infty
+Epoch = None
+
+val_loss_vector = []
+train_loss_vector = []
+
+
+
+#training with early stop
+for i in range(n_iterations):
+    logit = X_train.dot(theta)
+    y_prob = softmax(logit)
+    
+    train_loss = -np.mean(np.sum(y_train * np.log(y_prob + epsilon), axis=1))
+    train_loss_vector.append(train_loss)
+        
+    error = y_prob - y_train
+    gradients = 1/m * X_train.T.dot(error)
+    theta = theta - eta * gradients
+    
+    
+    #validaiton
+    logit = X_val.dot(theta)
+    y_prob = softmax(logit)
+    val_loss = -np.mean(np.sum(y_val * np.log(y_prob + epsilon), axis=1))
+
+    val_loss_vector.append(val_loss)
+    
+    if i % 500 == 0:
+        print(i, val_loss)
+    if val_loss < best_loss:
+        best_loss = val_loss
+    else:
+        print(i - 1, best_loss)
+        print(i, val_loss, "early stopping!")
+        break
+
+
+print("final model parameters:\n", theta)
+print("best_epoch:", i)
+
+
+#pred_classes = np.argmax(y_prob, axis=1)
+```
     
 
     
