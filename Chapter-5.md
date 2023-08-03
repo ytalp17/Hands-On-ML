@@ -97,5 +97,59 @@ print('w1:', sgd_pipeline[1].coef_[0][0], ', w2:', sgd_pipeline[1].coef_[0][1])
 print('b:', sgd_pipeline[1].intercept_[0])
 ```
 
+9 - Train an SVM classifier on the MNIST dataset. Since SVM classifiers are binary classifiers, you will need to use one-versus-the-rest to classify all 10 digits. You may want to tune the hyperparameters using small validation sets to speed up the process. What accuracy can you reach?
+
+```Python
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import RandomizedSearchCV
+from scipy.stats import reciprocal, uniform
+from sklearn.datasets import fetch_openml
+
+#Fetch data
+mnist = fetch_openml('mnist_784', version=1, cache=True, as_frame=False)
+X = mnist["data"]
+y = mnist["target"].astype(np.uint8)
+
+#train/test split
+X_train = X[:60000]
+y_train = y[:60000]
+X_test = X[60000:]
+y_test = y[60000:]
+
+#model training
+##Grid Search CV
+svm_pipeline = Pipeline([
+    ("ss",StandardScaler()),
+    ("svm", SVC(random_state = 48))
+])
+
+params = {"svm__gamma":[1/784, 0.12, 12] , "svm__C":[0.1 , 1, 10]}
+svm_cv = GridSearchCV(estimator=svm_pipeline, cv = 4, param_grid = params, verbose = 3)
+svm_cv.fit(X_train[:6000] ,y_train[:6000]) #no time
+
+svm_cv.best_params_
+
+##Random CV
+#dig depeer according to best_params_ above
+params = {"svm__gamma": reciprocal(0.0005, 00.1), "svm__C": uniform(5, 15)}
+rnd_search_cv = RandomizedSearchCV(svm_pipeline, param_distributions, n_iter=10,  cv=3, verbose=3)
+rnd_search_cv.fit(X_train[:6000], y_train[:6000])
+
+
+#accuracy on training set is 0.9395
+y_pred_x = rnd_search_cv.predict(X_train_scaled)
+accuracy_score(y_pred_x,y_train)
+
+#accuracy on test set is 0.937
+y_pred_test = rnd_search_cv.predict(X_test_scaled)
+accuracy_score(y_pred_test,y_test)
+
+```
+
+10 - Train an SVM regressor on the California housing dataset.
 
 
