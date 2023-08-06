@@ -98,3 +98,30 @@ disp2.ax_.set_title("Test Data")
 plt.show()
 ```
 
+8 - Grow a forest
+
+```Python
+from sklearn.model_selection import ShuffleSplit
+from scipy.stats import mode
+
+n_trees= 1000
+n_instances=100
+splitter= ShuffleSplit(n_splits=n_trees, test_size=len(X_train) - n_instances, random_state=42)
+
+tree_preds = []
+for  train_index, test_index in splitter.split(X_train):
+    
+    #model training
+    dtc_cv.fit(X_train[train_index,:], y_train[train_index])
+    y_test_pred = dtc_cv.predict(X_test)
+    tree_preds.append(y_test_pred)
+    acc_score = accuracy_score(y_test_pred, y_test)
+    print("DTC Accuracy score on test set:", acc_score, "\n")
+    
+tree_preds = np.vstack(tree_preds)  
+y_pred_majority_votes = mode(tree_preds, axis=0, keepdims=True)
+acc_score = accuracy_score(y_test, y_pred_majority_votes[0].reshape([-1]))
+print("Random Forest Accuracy score on test set:", acc_score, "\n")
+
+```
+
