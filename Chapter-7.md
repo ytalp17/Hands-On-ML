@@ -3,8 +3,9 @@
 1- If you have trained five different models on the exact same training data, and they all achieve 95% precision, 
    is there any chance that you can combine these models to get better results? If so, how? If not, why?
 
-It is possible to get better results by combining these models into a voting ensemble model. It is likely that not all the individual models classify 
-the instances into exactly the same class. Hence aggregating their answers by voting is very likely to get better results. (wisdom of the crowd)
+It is possible to get better results by combining these models into a voting ensemble model. Given that they are diversly different, it is likely that 
+not all the individual models classify the instances into exactly the same class. Hence aggregating their answers by voting is very likely to get 
+better results. (Wisdom of the crowd)
 
 2- What is the difference between hard and soft voting classifiers?
 
