@@ -2,54 +2,54 @@
 
 1- What are the main motivations for reducing a dataset’s dimensionality? What are the main drawbacks?
 
-The main motivation for reducing a dataset's dimensionalty is to optimize training performance of estimator by 
+The main motivation for reducing a dataset's dimensionality is to optimize the training performance of the estimator by 
 reducing the dimensions that have slight information about the data at hand. Consequently, dimensionality reduction would
-lead to a faster training process. Moreover, being able to visualise important features is another motivation of dimension reduction.
+lead to a faster training process. Moreover, being able to visualize important features is another motivation for dimension reduction.
 
-On the other hands, some dimensionality algorithms can be computationally expensive and add further complexity to your ML pipeline. 
-One of the most important drawback is the fact that transformed features being hard to interpret. Also, for some cases they could negatively
+On the other hand, some dimensionality algorithms can be computationally expensive and add further complexity to your ML pipeline. 
+One of the most important drawbacks is the fact that transformed features are hard to interpret. Also, in some cases, they could negatively
 affect the training performance of the predictor.
 
 2- What is the curse of dimensionality?
 
-As the dimensionality of the data space increases the probability of an observation being a outlier increases. Moreover, 
+As the dimensionality of the data space increases the probability of an observation being an outlier increases. Moreover, 
 the average distance between randomly selected two points increases exponentially (Sparse). Given these, learning (generalizing) from the data gets 
-exponentially harder. Thus, you would need more and more data in order to generalize well. Consequently, probability of overfitting increases 
+exponentially harder. Thus, you would need more and more data in order to generalize well. Consequently, the probability of overfitting increases 
 at higher dimensions.
 
 3- Once a dataset’s dimensionality has been reduced, is it possible to reverse the operation? If so, how? If not, why?
 
-If the main objective is to reduce dimensionalty, then it is not possible to reverse the operation. It's mainly becasue of the fact that 
-the dimension which was discarded also carry information (possibly slightly) about the data at hand. You cant have eat your cake and have it too..
+If the main objective is to reduce dimensionality, then it is not possible to reverse the operation. It's mainly because of the fact that 
+the dimension which was discarded also carries information (possibly slightly) about the data at hand. You cant have to eat your cake and have it too...
 
 4- Can PCA be used to reduce the dimensionality of a highly nonlinear dataset?
 
 In theory, yes you can, but probably would end up losing a lot of information (variance) from the initial data. On the other hand, variations of PCA
-such as Kernel PCA that utilizes infinite dimension mapping can be used for the nonlinear dataset.
+such as Kernel PCA which utilizes infinite dimension mapping can be used for the nonlinear dataset.
 
 5- Suppose you perform PCA on a 1,000-dimensional dataset, setting the explained variance ratio to 95%. How many dimensions will the resulting dataset have?
 
-It is hard to say. number of dimensions resulting dataset will have strictly depends on the structure of the initial data.
+It is hard to say. number of dimensions the resulting dataset will have strictly depends on the structure of the initial data.
 
 6- In what cases would you use vanilla PCA, Incremental PCA, Randomized PCA, or Kernel PCA?
 
 Vanilla PCA: For the linear medium datasets.
-Incremental PCA: For the linear large datasets, also for online tasks.
+Incremental PCA: For the linear large datasets, and also for online tasks.
 Randomized PCA: Same as Vanilla PCA, if you have a time restriction.
 Kernel PCA: For the non-linear datasets.
 
 7- How can you evaluate the performance of a dimensionality reduction algorithm on your dataset?
 
-Since it is an unsupervised learning algortihm it is hard to evalute the performance of them. However, if you build up a pipeline you can evalute its perfomance
-on the validation set together with your predictor algorithm, and ofcourse you need to keep the hyper-parameter of the predictor algortihm constant.
+Since it is an unsupervised learning algorithm it is hard to evaluate the performance of them. However, if you build up a pipeline you can evaluate its perfomance
+on the validation set together with your predictor algorithm, and of course, you need to keep the hyper-parameter of the predictor algorithm constant.
 
-Another way to evaluate the perforamance of them is to calculate reconstraction error. Intuitively, the one with the least reconstraction error, hence least 
+Another way to evaluate the performance of them is to calculate reconstruction error. Intuitively, the one with the least reconstruction error, hence the least 
 information loss would be a better performant.
 
 8- Does it make any sense to chain two different dimensionality reduction algorithms?
 
-It does, if you want to reduce the total time of training. You man chose to use a less complex algorithms (such as PCA) to get rid of large number of useless dimensions,
-and then use a more complex algorthms to keep really important dimensions.
+It does if you want to reduce the total time of training. You man chose to use less complex algorithms (such as PCA) to get rid of a large number of useless dimensions,
+and then use more complex algorithms to keep really important dimensions.
 
 9- Apply PCA + RF Classifier on Mnist Dataset
 
